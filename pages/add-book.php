@@ -9,18 +9,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $price = $_POST['price'];
     $author_id = $_POST['author_id'];
-    $new_author = $_POST['new_author'];
     $genre_id = $_POST['genre_id'];
 
-    if (!empty($new_author)) {
-
-        $stmt = $pdo->prepare('INSERT INTO authors (name) VALUES (:authorName)');
-        $stmt->execute(['authorName' => $new_author]);
-        
-    
-        $author_id = $pdo->lastInsertId();
-    }
-
+   
     $stmt = $pdo->prepare('INSERT INTO books (name, price, author_id, genre_id) VALUES (:bookName, :bookPrice, :authorId, :genreId)');
     $stmt->execute([
         'bookName' => $name,
@@ -29,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'genreId' => $genre_id,
     ]);
 
-
+   
     header('Location: index.php?page=books');
     exit;
 }
@@ -46,17 +37,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div class="mb-3">
         <label for="author_id" class="form-label">Author</label>
-        <select class="form-control" id="author_id" name="author_id">
-            <option value="">Select an existing author</option>
+        <select class="form-control" id="author_id" name="author_id" required>
+            <option value="">Select an author</option>
             <?php foreach ($authors as $author): ?>
                 <option value="<?= htmlspecialchars($author->id) ?>">
                     <?= htmlspecialchars($author->name) ?>
                 </option>
             <?php endforeach; ?>
         </select>
-        <br>
-        <label for="new_author" class="form-label">OR Enter a New Author</label>
-        <input type="text" class="form-control" id="new_author" name="new_author" placeholder="New author name">
     </div>
     <div class="mb-3">
         <label for="genre_id" class="form-label">Genre</label>
