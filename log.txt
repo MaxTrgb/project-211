@@ -1,0 +1,1 @@
+[13.11.2024 21:44:12] 127.0.0.1: SQLSTATE[22007]: Invalid datetime format: 1292 Truncated incorrect DOUBLE value: '3 or 1=1'
