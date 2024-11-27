@@ -27,6 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <a href="index.php?page=add-book" class="btn btn-primary">Add Book</a>
+<a href="pages/download-books.php" class="btn btn-secondary">Download PDF</a>
+
 
 <table class="table">
     <thead>
@@ -49,10 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <a class="btn btn-primary" href="index.php?page=edit-book&id=<?= $book->id ?>">Edit</a>
                     <form action="index.php?page=books" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this book?');">
                         <input type="hidden" name="id" value="<?= $book->id ?>">
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <button type="submit" class="btn btn-danger">Delete</button>                        
                     </form>
                 </td>
-            </tr>
+            </tr>            
         <?php endforeach; ?>
     </tbody>
 </table>
